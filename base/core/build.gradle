@@ -1,0 +1,101 @@
+import com.jansir.versionplugin.*
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin:'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+
+    compileSdkVersion BuildConfig.compileSdkVersion
+    buildToolsVersion BuildConfig.buildToolsVersion
+    defaultConfig {
+        minSdkVersion BuildConfig.minSdkVersion
+        targetSdkVersion BuildConfig.targetSdkVersion
+        versionCode BuildConfig.versionCode
+        versionName  BuildConfig.versionName
+        multiDexEnabled true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            consumerProguardFiles 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            aaptOptions.cruncherEnabled = false
+            aaptOptions.useNewCruncher = false
+
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+    packagingOptions {
+        exclude 'META-INF/proguard/coroutines.pro'
+    }
+    viewBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    //test
+    testApi Test.junit
+    androidTestApi Test.androidTestJunit
+    androidTestApi Test.espressoCore
+    // x
+    api AndroidX.core_ktx
+    api AndroidX.appcompat
+    api AndroidX.constraintlayout
+    api AndroidX.cardview
+    api AndroidX.startup
+    api AndroidX.recyclerview
+    api AndroidX.swiperefreshlayout
+    api AndroidX.lifecycle_extensions
+    api AndroidX.lifecycle_livedata_ktx
+    api AndroidX.lifecycle_viewmodel_ktx
+    // kt
+    api Kotlin.kotlin
+    api Kotlin.coroutines_core
+    api Kotlin.coroutines_android
+    //bus
+    api Bus.live_event_bus_x
+    //glide
+    api Glide.glide
+    //ui
+    api UI.XUI
+    api UI.xpopup
+    api UI.PickerView
+    api UI.PictureSelector
+    api UI.lottie
+    api UI.BaseRecyclerViewAdapterHelper
+    api UI.easyadapter
+    api UI.me_fragmentationx
+    api UI.me_fragmentationx_swipeback
+    api UI.me_eventbus_activity_scope
+//    api UI.viewbinding_ktx
+    //http
+    api Http.gson
+    api Http.okhttp
+    api Http.progressmanager
+    //data
+    api Data.mmkv
+    //tool
+    api Tool.utilcode
+    api Tool.xxpermissions
+    api Tool.Cockroach
+    api Tool.logger
+
+
+
+
+}
+
+apply plugin: 'com.github.dcendents.android-maven'
+group = 'com.github.jiangpana'
